@@ -1,0 +1,36 @@
+{
+  "name": "ram-policy-editor",
+  "version": "1.0.5",
+  "description": "Visual RAM Policy Editor",
+  "main": "app.js",
+  "dependencies": {
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.2.0",
+    "react": "^0.14.8",
+    "react-bootstrap-multiselect": "^1.0.2",
+    "react-dom": "^0.14.8",
+    "react-tagsinput": "^3.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify -t [ babelify --presets [ react ] ] app.js -o app-babel.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aliyun/ram-policy-editor.git"
+  },
+  "keywords": [
+    "Aliyun",
+    "OSS",
+    "RAM",
+    "Policy",
+    "react"
+  ],
+  "author": "Tianlong Wu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aliyun/ram-policy-editor/issues"
+  },
+  "homepage": "https://github.com/aliyun/ram-policy-editor#readme"
+}
