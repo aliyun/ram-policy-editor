@@ -1,16 +1,16 @@
-# ram-policy-editor
+# RAM Policy Editor
 
 ## [README of English](https://github.com/aliyun/ram-policy-editor/blob/master/README.md)
 
 ## 关于
 
-Visual RAM Policy Editor for OSS.
+可视化的OSS授权策略生成器。
 
 ## 示例
 
 [http://gosspublic.alicdn.com/ram-policy-editor/index.html](http://gosspublic.alicdn.com/ram-policy-editor/index.html)
 
-## 用法
+## 用法
 
 ### Resources
 
