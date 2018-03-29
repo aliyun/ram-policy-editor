@@ -1,28 +1,31 @@
-# ram-policy-editor
+# RAM Policy Editor
 
-Visual RAM Policy Editor
+## [README of Chinese](https://github.com/aliyun/ram-policy-editor/blob/master/README-CN.md)
+
+## About
+
+Visual RAM Policy Editor for OSS.
 
 ## Demo
 
-http://gosspublic.alicdn.com/ram-policy-editor/index.html
+[http://gosspublic.alicdn.com/ram-policy-editor/index.html](http://gosspublic.alicdn.com/ram-policy-editor/index.html)
 
 ## Usage
 
 ### Resources
 
-Resources有如下几种格式：
+Resources can be represented in the following formats:
 
-- 表示某个bucket: `my-bucket` （此时对bucket下的文件没有权限）
-- 表示某个bucket下面所有文件: `my-bucket/*` （此时对bucket本身没有权限，例如ListObjects）
-- 表示某个bucket下某个目录: `my-bucket/dir` （此时对dir/下面的文件没有权限）
-- 表示某个bucket下某个目录下面所有文件: `my-bucket/dir/*` （此时对dir没有权限，例如ListObjects）
-- 填写完整的资源路径：`acs:oss:*:1234:my-bucket/dir`，其中`1234`为用户的User ID（在控制台查看）
+- A bucket: `my-bucket` (with no permission on objects in the bucket)
+- All objects in a bucket: `my-bucket/*` (with no permission on the bucket itself, such as ListObjects)
+- A directory in a bucket: `my-bucket/dir` (with no permission on objects under dir/)
+- All objects under a directory in a bucket: `my-bucket/dir/*` (with no permission on dir, such as ListObjects)
+- Complete resource path: `acs:oss:*:1234:my-bucket/dir`, where `1234` is the User ID (view the User ID in the console).
 
 ### EnablePath
 
-当用户需要对某个目录授权时，往往还需要保证对上一层目录也有List权限，例
-如用户对`my-bucket/users/dir/*`赋予读写权限，为了在控制台（或其他工具）
-能够查看这个目录，用户还需要以下权限：
+When you want to grant permissions to a directory, you also need to grant the List permission on its upper level directory. For example, if you want to grant read and write permissions to `my-bucket/users/dir/*`, you also need to grant the following permissions to
+view this directory in the console (or in other tools):
 
 ```
 ListObjects my-bucket
@@ -30,72 +33,61 @@ ListObjects my-bucket/users
 ListObjects my-bucket/users/dir
 ```
 
-勾选EnablePath选项时，上面这些权限会自动添加。
+When the **EnablePath** option is selected, these permissions are granted automatically.
 
 ### Examples
 
 #### Full access to a bucket
 
-对某个bucket（例如`my-bucket`）完全授权：
+To grant all permissions to a bucket (such as `my-bucket`), add a rule as follows:
 
-添加一条规则：
+- **Effect**: Select `Allow`.
+- **Actions**: Select `oss:*`.
+- **Resources**: Enter `my-bucket` and `my-bucket/*`.
+- **EnablePath**: Unselected.
 
-- Effect设置为`Allow`
-- Action选择`oss:*`
-- Resource填写为`my-bucket`和`my-bucket/*`
-- EnablePath不勾选
+> **Note:**
+- For read-only permission, replace `oss:*` with `oss:Get*`.
+- For write-only permission, replace `oss:*` with `oss:Put*`.
 
-注意：
+#### Full access to a directory
 
-- 如果是只读权限，把`oss:*`换成`oss:Get*`;
-- 如果是只读权限，把`oss:*`换成`oss:Put*`;
+To grant all permissions to `my-dir` in `my-bucket`, add a rule as follows:
 
-#### Full access to a dir
+- **Effect**: Select `Allow`.
+- **Actions**: Select `oss:*`. 
+- **Resources**: Enter `my-bucket/my-dir/*`.
+- **EnablePath**: Selected.
 
-对`my-bucket`下的`my-dir`完全授权：
-
-添加一条规则：
-
-- Effect设置为`Allow`
-- Action选择`oss:*`
-- Resource填写为`my-bucket/my-dir/*`
-- EnablePath勾选
-
-注意：
-
-- 如果是只读权限，把`oss:*`换成`oss:Get*`;
-- 如果是只读权限，把`oss:*`换成`oss:Put*`;
+> **Note:**
+- For read-only permission, replace `oss:*` with `oss:Get*`.
+- For write-only permission, replace `oss:*` with `oss:Put*`.
 
 #### Allow only specified IP
 
-只允许特定的IP来访问`my-bucket`下面的`my-dir`目录。
+To allow only specified IP addresses to access the `my-dir` directory in `my-bucket`, add a rule as follows:
 
-添加一条规则：
+- **Effect**: Select `Allow`.
+- **Actions**: Select `oss:Get*`.
+- **Resources**: Enter `my-bucket/my-dir/*`.
+- **EnablePath**: Unselected.
+- **Conditions**: Click **Show** and add conditions as follows:
+  - **Key**: Select `acs:SourceIp`. 
+  - **Operator**: Select `IpAddress`.
+  - **Value**: Enter the IP address, such as `40.32.9.125`.
 
-- Effect设置为`Allow`
-- Action选择`oss:Get*`
-- Resource填写为`my-bucket/my-dir/*`
-- EnablePath不勾选
-- 添加条件
-  - Key选择为`acs:SourceIp`
-  - Operator选择为`IpAddress`
-  - Value填具体的IP，如`40.32.9.125`
+> **Note:**
+- For read-only permission, replace `oss:*` with `oss:Get*`.
+- For write-only permission, replace `oss:*` with `oss:Put*`.
 
-注意：
+#### Web Console
 
-- 如果是只读权限，把`oss:*`换成`oss:Get*`;
-- 如果是只读权限，把`oss:*`换成`oss:Put*`;
+To allow a RAM user to access the Alibaba Cloud console, you must grant the `oss:ListBuckets` permission by adding a rule as follows:
 
-#### Web console
-
-如果需要在阿里云的控制台用子账号访问，需要有`oss:ListBuckets`权限。
-
-需要额外添加一条规则：
-
-- Effect设置为`Allow`
-- Action选择`oss:ListBuckets`
-- Resource填写为`*`
-- EnablePath不勾选
+- **Effect**: Select `Allow`.
+- **Actions**: Select `oss:ListBuckets`.
+- **Resources**: Enter `*`.
+- **EnablePath**: Unselected.
 
 ### Build
 
