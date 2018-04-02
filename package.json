@@ -1,6 +1,6 @@
 {
   "name": "ram-policy-editor",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Visual RAM Policy Editor",
   "main": "app.js",
   "dependencies": {

@@ -18,7 +18,11 @@ body {
     float: right;
     margin-top: -30px;
 }
-
+.language {
+    float: left;
+    margin-left: 750px;
+    margin-top: -30px;
+}
 .notice {
     color: red;
     font-weight: bold;
