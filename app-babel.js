@@ -1,6 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
+
 var React = require('react');
 var ReactDOM = require('react-dom');
 var MultiSelect = require('react-bootstrap-multiselect');
@@ -13,7 +14,7 @@ var ActionList = [{
   children: ['oss:*', 'oss:Get*', 'oss:Put*', 'oss:List*']
 }, {
   label: 'Object',
-  children: ['oss:GetObject', 'oss:PutObject', 'oss:DeleteObject', 'oss:GetObjectAcl', 'oss:PutObjectAcl', 'oss:ListParts', 'oss:AbortMultipartUpload', 'oss:ListObjects']
+  children: ['oss:GetObject', 'oss:PutObject', 'oss:DeleteObject', 'oss:GetObjectAcl', 'oss:PutObjectAcl', 'oss:ListParts', 'oss:AbortMultipartUpload', 'oss:ListObjects', 'oss:RestoreObject',]
 }, {
   label: 'Bucket',
   children: ['oss:ListBuckets', 'oss:PutBucket', 'oss:DeleteBucket', 'oss:GetBucketLocation', 'oss:ListMultipartUploads', 'oss:PutBucketAcl', 'oss:GetBucketAcl', 'oss:PutBucketReferer', 'oss:GetBucketReferer', 'oss:PutBucketLogging', 'oss:GetBucketLogging', 'oss:DeleteBucketLogging', 'oss:PutBucketWebsite', 'oss:GetBucketWebsite', 'oss:DeleteBucketWebsite', 'oss:PutBucketLifecycle', 'oss:GetBucketLifecycle', 'oss:DeleteBucketLifecycle', 'oss:PutBucketCors', 'oss:GetBucketCors', 'oss:DeleteBucketCors', 'oss:PutBucketReplication', 'oss:GetBucketReplication', 'oss:DeleteBucketReplication', 'oss:GetBucketReplicationLocation', 'oss:GetBucketReplicationProgress'] }];
@@ -249,7 +250,7 @@ var RuleEditor = React.createClass({
                 '自动设置父目录权限',
                 React.createElement(
                   'a',
-                  { href: 'https://github.com/aliyun/ram-policy-editor#enablepath' },
+                  { href: 'https://github.com/aliyun/ram-policy-editor/blob/master/README-CN.md#enablepath' },
                   React.createElement(
                     'b',
                     null,
@@ -296,7 +297,7 @@ var RuleEditor = React.createClass({
           React.createElement(
             'div',
             { className: 'col-sm-offset-2 col-sm-10' },
-            React.createElement('input', { type: 'submit', className: 'btn btn-primary', value: '添加规则' })
+            React.createElement('input', { type: 'submit', className: 'btn btn-primary', value: '生成授权策略' })
           )
         )
       )
@@ -31903,7 +31904,7 @@ module.exports = require('./lib/React');
 },{"./lib/React":59}],165:[function(require,module,exports){
 module.exports={
   "name": "ram-policy-editor",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Visual RAM Policy Editor",
   "main": "app.js",
   "dependencies": {
