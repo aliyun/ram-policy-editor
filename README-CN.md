@@ -68,7 +68,7 @@ ListObjects my-bucket/users/dir
 注意：
 
 - 如果是只读权限，把`oss:*`换成`oss:Get*`;
-- 如果是只读权限，把`oss:*`换成`oss:Put*`;
+- 如果是只写权限，把`oss:*`换成`oss:Put*`;
 
 #### Allow only specified IP
 
