@@ -169,6 +169,7 @@ var RuleEditor = React.createClass({
             'div',
             { className: 'col-sm-10' },
             React.createElement(MultiSelect, {
+              enableCaseInsensitiveFiltering: true,
               multiple: true,
               maxHeight: 300,
               data: selectAction,
@@ -465,6 +466,7 @@ var PolicyView = React.createClass({
       };
     });
 
+    var jsons = JSON.stringify(policy, null, 2);
     return React.createElement(
       'div',
       { className: 'policyView' },
@@ -473,9 +475,15 @@ var PolicyView = React.createClass({
         null,
         'Authorization Policy'
       ),
-      React.createElement('textarea', { className: 'form-control', rows: '20', cols: '60',
-        onChange: this.handleChange,
-        value: JSON.stringify(policy, null, 2) })
+      React.createElement(
+      'pre',
+      { className: 'form-control', rows: '20', cols: '60', style : {height: '414px',
+        overflow: 'auto',
+        margin: '0' }
+        },
+        null,
+        React.createElement('code', { className: 'hljs json'},
+        jsons))
     );
   }
 });
@@ -843,6 +851,11 @@ var PolicyEditor = React.createClass({
     this.setState({ data: newPolicy });
   },
 
+  componentDidUpdate:function(prevProps, prevState) {
+         $('pre code').each(function(i, block) {
+                       hljs.highlightBlock(block);
+                       });
+   },
   render: function () {
     return React.createElement(
       'div',
@@ -31904,7 +31917,7 @@ module.exports = require('./lib/React');
 },{"./lib/React":59}],165:[function(require,module,exports){
 module.exports={
   "name": "ram-policy-editor",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Visual RAM Policy Editor",
   "main": "app.js",
   "dependencies": {
